@@ -1,0 +1,2 @@
+import{p as e,b as t}from"./p-10b4a72e.js";export{s as setNonce}from"./p-10b4a72e.js";import{g as i}from"./p-e1255160.js";var a=()=>{const s=import.meta.url;const t={};if(s!==""){t.resourcesUrl=new URL(".",s).href}return e(t)};a().then((async e=>{await i();return t([["p-505114db",[[1,"insiteco-feedback",{isVisible:[32]}],[1,"insiteco-chat"],[1,"insiteco-input",{inputValue:[32]}]]]],e)}));
+//# sourceMappingURL=stencil-component-example.esm.js.map

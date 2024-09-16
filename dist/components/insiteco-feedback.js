@@ -1,6 +1,48 @@
-import { p as proxyCustomElement, H, h, c as Host } from './p-b52308a4.js';
-import { d as defineCustomElement$3 } from './p-468fc91d.js';
-import { d as defineCustomElement$2 } from './p-3d18b500.js';
+import { p as proxyCustomElement, H, h, c as Host } from './p-267b755d.js';
+import { d as defineCustomElement$3 } from './p-d1cf456c.js';
+import { d as defineCustomElement$2 } from './p-4b5c9233.js';
+
+// Patch Worker to allow loading scripts from remote URLs
+//
+// It's a workaround for the fact that the Worker constructor
+// accepts only local URLs, not remote URLs:
+// https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker
+//
+// As a workaround this patched Worker constructor will
+// use `importScripts` to load the remote script.
+// https://developer.mozilla.org/en-US/docs/Web/API/WorkerGlobalScope/importScripts
+//
+// Compatibility: Chrome 4+, Firefox 4+, Safari 4+
+//
+// Usage:
+// ```ts
+// import "remote-web-worker";
+// ```
+typeof window !== "undefined" && (Worker = ((BaseWorker)=>class Worker1 extends BaseWorker {
+        constructor(scriptURL, options){
+            const url = String(scriptURL);
+            super(// Check if the URL is remote
+            url.includes("://") && !url.startsWith(location.origin) ? // to bootstrap the actual script to work around the same origin policy.
+            URL.createObjectURL(new Blob([
+                // Replace the `importScripts` function with
+                // a patched version that will resolve relative URLs
+                // to the remote script URL.
+                //
+                // Without a patched `importScripts` Webpack 5 generated worker chunks will fail with the following error:
+                //
+                // Uncaught (in promise) DOMException: Failed to execute 'importScripts' on 'WorkerGlobalScope':
+                // The script at 'http://some.domain/worker.1e0e1e0e.js' failed to load.
+                //
+                // For minification, the inlined variable names are single letters:
+                // i = original importScripts
+                // a = arguments
+                // u = URL
+                `importScripts=((i)=>(...a)=>i(...a.map((u)=>''+new URL(u,"${url}"))))(importScripts);importScripts("${url}")`
+            ], {
+                type: "text/javascript"
+            })) : scriptURL, options);
+        }
+    })(Worker));
 
 const workerPath = new URL('assets/conversation.worker.js-d2398ba3.js', import.meta.url).href;
 
@@ -32,7 +74,7 @@ const InsitecoFeedback$1 = /*@__PURE__*/ proxyCustomElement(class InsitecoFeedba
         });
     }
     render() {
-        return (h(Host, { key: '8c44952943a9d7132339a42fe9e67012155d7a32' }, this.isVisible ? (h("div", { class: "flex justify-center bg-white items-center h-[500px] fixed right-4 bottom-4 rounded-2xl" }, h("div", { class: "card shadow-2xl p-4 w-96 h-full" }, h("div", { class: "card-body p-1 h-full flex flex-col justify-between" }, h("div", { class: "flex flex-col flex-1" }, h("section", { class: "w-full flex justify-end h-8 items-center" }, h("section", { class: "w-fit cursor-pointer", onClick: () => this.toggleVisibility() }, h("svg", { class: "icon", viewBox: "0 0 1024 1024", version: "1.1", xmlns: "http://www.w3.org/2000/svg", "p-id": "2766", width: "20", height: "20" }, h("path", { d: "M807.6288 550.8096H224.2048c-17.5104 0-30.72-16.7936-30.72-38.7072s13.3632-38.7072 30.72-38.7072h583.424c17.5104 0 30.72 16.7936 30.72 38.7072s-14.0288 38.7072-30.72 38.7072z", "p-id": "2767", fill: "black" }), h("path", { d: "M807.5776 554.0352H224.2048c-19.456 0-34.0992-18.0224-34.0992-41.9328s14.6432-41.9328 34.0992-41.9328h583.3728c19.456 0 34.0992 18.0224 34.0992 41.9328 0 23.1424-15.2576 41.9328-34.0992 41.9328zM224.2048 476.6208c-15.7696 0-27.648 15.36-27.648 35.4816s11.8784 35.4816 27.648 35.4816h583.3728c15.36 0 27.648-15.9232 27.648-35.4816s-11.8784-35.4816-27.648-35.4816z", "p-id": "2768", fill: "black" })))), h("section", { class: "mt-2 flex-1 overflow-hidden" }, h("insiteco-chat", { class: "w-full h-full" }))), h("div", { class: "flex flex-col gap-2 mt-3" }, h("insiteco-input", null)))))) : (h("div", { class: 'vertical-text', onClick: () => this.toggleVisibility() }, h("span", null, "Feedback")))));
+        return (h(Host, { key: '8b1076789ad5fdd45397687ac3d67b44cdde85fb' }, this.isVisible ? (h("div", { class: "flex justify-center bg-white items-center h-[500px] fixed right-4 bottom-4 rounded-2xl" }, h("div", { class: "card shadow-2xl p-4 w-96 h-full" }, h("div", { class: "card-body p-1 h-full flex flex-col justify-between" }, h("div", { class: "flex flex-col flex-1" }, h("section", { class: "w-full flex justify-end h-8 items-center" }, h("section", { class: "w-fit cursor-pointer", onClick: () => this.toggleVisibility() }, h("svg", { class: "icon", viewBox: "0 0 1024 1024", version: "1.1", xmlns: "http://www.w3.org/2000/svg", "p-id": "2766", width: "20", height: "20" }, h("path", { d: "M807.6288 550.8096H224.2048c-17.5104 0-30.72-16.7936-30.72-38.7072s13.3632-38.7072 30.72-38.7072h583.424c17.5104 0 30.72 16.7936 30.72 38.7072s-14.0288 38.7072-30.72 38.7072z", "p-id": "2767", fill: "black" }), h("path", { d: "M807.5776 554.0352H224.2048c-19.456 0-34.0992-18.0224-34.0992-41.9328s14.6432-41.9328 34.0992-41.9328h583.3728c19.456 0 34.0992 18.0224 34.0992 41.9328 0 23.1424-15.2576 41.9328-34.0992 41.9328zM224.2048 476.6208c-15.7696 0-27.648 15.36-27.648 35.4816s11.8784 35.4816 27.648 35.4816h583.3728c15.36 0 27.648-15.9232 27.648-35.4816s-11.8784-35.4816-27.648-35.4816z", "p-id": "2768", fill: "black" })))), h("section", { class: "mt-2 flex-1 overflow-hidden" }, h("insiteco-chat", { class: "w-full h-full" }))), h("div", { class: "flex flex-col gap-2 mt-3" }, h("insiteco-input", null)))))) : (h("div", { class: 'vertical-text', onClick: () => this.toggleVisibility() }, h("span", null, "Feedback")))));
     }
     static get style() { return InsitecoFeedbackStyle0; }
 }, [1, "insiteco-feedback", {
@@ -66,3 +108,5 @@ const InsitecoFeedback = InsitecoFeedback$1;
 const defineCustomElement = defineCustomElement$1;
 
 export { InsitecoFeedback, defineCustomElement };
+
+//# sourceMappingURL=insiteco-feedback.js.map

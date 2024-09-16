@@ -16,3 +16,4 @@ export class InsitecoChat {
         };
     }
 }
+//# sourceMappingURL=insiteco-chat.js.map

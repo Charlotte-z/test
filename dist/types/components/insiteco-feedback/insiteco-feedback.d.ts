@@ -1,3 +1,4 @@
+import 'remote-web-worker';
 export declare class InsitecoFeedback {
     isVisible: boolean;
     private worker;
