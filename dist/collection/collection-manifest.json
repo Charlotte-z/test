@@ -1,8 +1,7 @@
 {
   "entries": [
-    "components/insiteco-chat/insiteco-chat.js",
-    "components/insiteco-feedback/insiteco-feedback.js",
-    "components/insiteco-input/insiteco-input.js"
+    "components/insightsmith-feedback/insightsmith-feedback.js",
+    "components/insightsmith-icons/insightsmith-icons.js"
   ],
   "compiler": {
     "name": "@stencil/core",

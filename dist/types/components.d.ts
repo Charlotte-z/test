@@ -6,58 +6,49 @@
  */
 import { HTMLStencilElement, JSXBase } from "./stencil-public-runtime";
 export namespace Components {
-    interface InsitecoChat {
+    interface InsightsmithFeedback {
     }
-    interface InsitecoFeedback {
-    }
-    interface InsitecoInput {
+    interface InsightsmithIcons {
+        "class"?: string;
+        "name": 'attachment' | 'screenshot';
     }
 }
 declare global {
-    interface HTMLInsitecoChatElement extends Components.InsitecoChat, HTMLStencilElement {
+    interface HTMLInsightsmithFeedbackElement extends Components.InsightsmithFeedback, HTMLStencilElement {
     }
-    var HTMLInsitecoChatElement: {
-        prototype: HTMLInsitecoChatElement;
-        new (): HTMLInsitecoChatElement;
+    var HTMLInsightsmithFeedbackElement: {
+        prototype: HTMLInsightsmithFeedbackElement;
+        new (): HTMLInsightsmithFeedbackElement;
     };
-    interface HTMLInsitecoFeedbackElement extends Components.InsitecoFeedback, HTMLStencilElement {
+    interface HTMLInsightsmithIconsElement extends Components.InsightsmithIcons, HTMLStencilElement {
     }
-    var HTMLInsitecoFeedbackElement: {
-        prototype: HTMLInsitecoFeedbackElement;
-        new (): HTMLInsitecoFeedbackElement;
-    };
-    interface HTMLInsitecoInputElement extends Components.InsitecoInput, HTMLStencilElement {
-    }
-    var HTMLInsitecoInputElement: {
-        prototype: HTMLInsitecoInputElement;
-        new (): HTMLInsitecoInputElement;
+    var HTMLInsightsmithIconsElement: {
+        prototype: HTMLInsightsmithIconsElement;
+        new (): HTMLInsightsmithIconsElement;
     };
     interface HTMLElementTagNameMap {
-        "insiteco-chat": HTMLInsitecoChatElement;
-        "insiteco-feedback": HTMLInsitecoFeedbackElement;
-        "insiteco-input": HTMLInsitecoInputElement;
+        "insightsmith-feedback": HTMLInsightsmithFeedbackElement;
+        "insightsmith-icons": HTMLInsightsmithIconsElement;
     }
 }
 declare namespace LocalJSX {
-    interface InsitecoChat {
+    interface InsightsmithFeedback {
     }
-    interface InsitecoFeedback {
-    }
-    interface InsitecoInput {
+    interface InsightsmithIcons {
+        "class"?: string;
+        "name"?: 'attachment' | 'screenshot';
     }
     interface IntrinsicElements {
-        "insiteco-chat": InsitecoChat;
-        "insiteco-feedback": InsitecoFeedback;
-        "insiteco-input": InsitecoInput;
+        "insightsmith-feedback": InsightsmithFeedback;
+        "insightsmith-icons": InsightsmithIcons;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "insiteco-chat": LocalJSX.InsitecoChat & JSXBase.HTMLAttributes<HTMLInsitecoChatElement>;
-            "insiteco-feedback": LocalJSX.InsitecoFeedback & JSXBase.HTMLAttributes<HTMLInsitecoFeedbackElement>;
-            "insiteco-input": LocalJSX.InsitecoInput & JSXBase.HTMLAttributes<HTMLInsitecoInputElement>;
+            "insightsmith-feedback": LocalJSX.InsightsmithFeedback & JSXBase.HTMLAttributes<HTMLInsightsmithFeedbackElement>;
+            "insightsmith-icons": LocalJSX.InsightsmithIcons & JSXBase.HTMLAttributes<HTMLInsightsmithIconsElement>;
         }
     }
 }
